@@ -54,8 +54,6 @@
 	BOOL _hideFutureNetworkErrors;
 }
 
-//- (id) initWithApplicationContext:(OBAApplicationContext*)context;
-
 @property (nonatomic,strong) IBOutlet OBAApplicationContext * appContext;
 @property (nonatomic,strong) IBOutlet MKMapView * mapView;
 @property (nonatomic,strong) IBOutlet UIBarButtonItem * currentLocationButton;
