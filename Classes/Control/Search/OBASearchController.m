@@ -53,13 +53,7 @@
 }
 
 -(void) dealloc {
-	
 	[self cancelOpenConnections];
-
-	
-	
-	
-	
 }
 
 -(void) searchWithTarget:(OBANavigationTarget*)target {
