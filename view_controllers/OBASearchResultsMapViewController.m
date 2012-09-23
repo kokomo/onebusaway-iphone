@@ -182,8 +182,16 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
     
     self.view = self.paperFoldView;
     [self.paperFoldView setCenterContentView:originalView];
-        
-    self.navigationItem.titleView = self.searchBar;
+
+    UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 191, 30)];
+
+    searchTextField.placeholder = NSLocalizedString(@"Search", @"");
+    searchTextField.borderStyle = UITextBorderStyleNone;
+    searchTextField.background = [[UIImage imageNamed:@"search_bar_border"] stretchableImageWithLeftCapWidth:17 topCapHeight:15];
+
+    self.navigationItem.titleView = searchTextField;
+
+//    self.navigationItem.titleView = self.searchBar;
 
     [self _setupOnMapToolbar];
 }
