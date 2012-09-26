@@ -147,8 +147,7 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
 	
 	_locationAnnotation = nil;
 	
-	CLLocationCoordinate2D p = {0,0};
-	_mostRecentRegion = MKCoordinateRegionMake(p, MKCoordinateSpanMake(0,0));
+	_mostRecentRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(0, 0), MKCoordinateSpanMake(0,0));
 	
 	_refreshTimer = nil;
 	
@@ -196,7 +195,6 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
     [self _setupOnMapToolbar];
 }
 
-// TODO: Fix crappy layout.
 - (void)_setupOnMapToolbar {
     CGFloat toolbarButtonWidth = 40;
     CGFloat toolbarWidth = toolbarButtonWidth + 1 + 2 + 1 + toolbarButtonWidth;
