@@ -72,7 +72,7 @@
         // Settings
         pushMe = [[IASKAppSettingsViewController alloc] init];
         pushMe.title = NSLocalizedString(@"Settings", @"");
-        // TODO: Bring this out of the app context.
+        // TODO: Bring this out of the app context, and put it here instead.
         //settingsViewController.delegate = self;
     }
     else if (2 == indexPath.row) {
