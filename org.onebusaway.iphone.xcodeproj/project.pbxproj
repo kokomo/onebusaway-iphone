@@ -266,6 +266,9 @@
 		933C8039160C07440005AAFE /* OBAWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 933C7F5A160C07440005AAFE /* OBAWebViewController.xib */; };
 		9359BAD2160FCC4C00019CD2 /* search_bar_border.png in Resources */ = {isa = PBXBuildFile; fileRef = 9359BAD0160FCC4C00019CD2 /* search_bar_border.png */; };
 		9359BAD3160FCC4C00019CD2 /* search_bar_border@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9359BAD1160FCC4C00019CD2 /* search_bar_border@2x.png */; };
+		9359BAD6160FDB5A00019CD2 /* search_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9359BAD4160FDB5A00019CD2 /* search_icon.png */; };
+		9359BAD7160FDB5A00019CD2 /* search_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9359BAD5160FDB5A00019CD2 /* search_icon@2x.png */; };
+		9359BADB160FDC2300019CD2 /* SLSearchTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9359BADA160FDC2300019CD2 /* SLSearchTextField.m */; };
 		93631E401604F72900CB7209 /* OBAArrivalEntryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93631E3D1604F72900CB7209 /* OBAArrivalEntryTableViewCell.xib */; };
 		93631E411604F72900CB7209 /* OBANearbyStopsPageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93631E3E1604F72900CB7209 /* OBANearbyStopsPageTableViewCell.xib */; };
 		93631E451604F77A00CB7209 /* OBADiversionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93631E441604F77A00CB7209 /* OBADiversionViewController.xib */; };
@@ -724,6 +727,10 @@
 		933C7F5A160C07440005AAFE /* OBAWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OBAWebViewController.xib; sourceTree = "<group>"; };
 		9359BAD0160FCC4C00019CD2 /* search_bar_border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = search_bar_border.png; path = Resources/search_bar_border.png; sourceTree = "<group>"; };
 		9359BAD1160FCC4C00019CD2 /* search_bar_border@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "search_bar_border@2x.png"; path = "Resources/search_bar_border@2x.png"; sourceTree = "<group>"; };
+		9359BAD4160FDB5A00019CD2 /* search_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = search_icon.png; path = Resources/search_icon.png; sourceTree = "<group>"; };
+		9359BAD5160FDB5A00019CD2 /* search_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "search_icon@2x.png"; path = "Resources/search_icon@2x.png"; sourceTree = "<group>"; };
+		9359BAD9160FDC2300019CD2 /* SLSearchTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSearchTextField.h; sourceTree = "<group>"; };
+		9359BADA160FDC2300019CD2 /* SLSearchTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSearchTextField.m; sourceTree = "<group>"; };
 		93631E3D1604F72900CB7209 /* OBAArrivalEntryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OBAArrivalEntryTableViewCell.xib; sourceTree = "<group>"; };
 		93631E3E1604F72900CB7209 /* OBANearbyStopsPageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OBANearbyStopsPageTableViewCell.xib; sourceTree = "<group>"; };
 		93631E441604F77A00CB7209 /* OBADiversionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OBADiversionViewController.xib; sourceTree = "<group>"; };
@@ -942,6 +949,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9359BAD4160FDB5A00019CD2 /* search_icon.png */,
+				9359BAD5160FDB5A00019CD2 /* search_icon@2x.png */,
 				9359BAD0160FCC4C00019CD2 /* search_bar_border.png */,
 				9359BAD1160FCC4C00019CD2 /* search_bar_border@2x.png */,
 				93631EA41607F40C00CB7209 /* lbs_arrow.png */,
@@ -1492,6 +1501,15 @@
 			path = MapIcons;
 			sourceTree = "<group>";
 		};
+		9359BAD8160FDC0F00019CD2 /* text */ = {
+			isa = PBXGroup;
+			children = (
+				9359BAD9160FDC2300019CD2 /* SLSearchTextField.h */,
+				9359BADA160FDC2300019CD2 /* SLSearchTextField.m */,
+			);
+			path = text;
+			sourceTree = "<group>";
+		};
 		93631E461604F80000CB7209 /* migrations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1608,6 +1626,7 @@
 		93AD36371603FE4600BDF03F /* controls */ = {
 			isa = PBXGroup;
 			children = (
+				9359BAD8160FDC0F00019CD2 /* text */,
 				931C42CA160F983300435CD3 /* labels */,
 				9330DF251606404100E14AF4 /* containers */,
 				93631E7A1604F9A200CB7209 /* alerts */,
@@ -2020,6 +2039,8 @@
 				931C42BD160E47FC00435CD3 /* OBAGenericStopViewController.xib in Resources */,
 				9359BAD2160FCC4C00019CD2 /* search_bar_border.png in Resources */,
 				9359BAD3160FCC4C00019CD2 /* search_bar_border@2x.png in Resources */,
+				9359BAD6160FDB5A00019CD2 /* search_icon.png in Resources */,
+				9359BAD7160FDB5A00019CD2 /* search_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2185,6 +2206,7 @@
 				933C7F9E160C07440005AAFE /* OBAWebViewController.m in Sources */,
 				931C42C2160E4B2A00435CD3 /* MKMapView+oba_Additions.m in Sources */,
 				931C42CD160F984000435CD3 /* OBAShadowLabel.m in Sources */,
+				9359BADB160FDC2300019CD2 /* SLSearchTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

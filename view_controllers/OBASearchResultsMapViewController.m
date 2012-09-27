@@ -36,6 +36,7 @@
 #import "OBAPresentation.h"
 #import "PaperFoldView.h"
 #import "OBAInfoViewController.h"
+#import "SLSearchTextField.h"
 
 #define kScopeViewAnimationDuration 0.25
 
@@ -183,15 +184,11 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
     self.view = self.paperFoldView;
     [self.paperFoldView setCenterContentView:originalView];
 
-    UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 191, 30)];
+    SLSearchTextField *searchTextField = [[SLSearchTextField alloc] initWithFrame:CGRectMake(0, 0, 191, 30)];
 
-    searchTextField.placeholder = NSLocalizedString(@"Search", @"");
-    searchTextField.borderStyle = UITextBorderStyleNone;
-    searchTextField.background = [[UIImage imageNamed:@"search_bar_border"] stretchableImageWithLeftCapWidth:17 topCapHeight:15];
+//    self.navigationItem.titleView = searchTextField;
 
-    self.navigationItem.titleView = searchTextField;
-
-//    self.navigationItem.titleView = self.searchBar;
+    self.navigationItem.titleView = self.searchBar;
 
     [self _setupOnMapToolbar];
 }
