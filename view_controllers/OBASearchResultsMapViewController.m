@@ -19,7 +19,6 @@
 #import "OBAStopV2.h"
 #import "OBARouteV2.h"
 #import "OBAAgencyWithCoverageV2.h"
-#import "OBAStopAnnotation.h"
 #import "OBAGenericAnnotation.h"
 #import "OBAAgencyWithCoverage.h"
 #import "OBANavigationTargetAnnotation.h"
@@ -148,8 +147,7 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
 	
 	_locationAnnotation = nil;
 	
-	CLLocationCoordinate2D p = {0,0};
-	_mostRecentRegion = MKCoordinateRegionMake(p, MKCoordinateSpanMake(0,0));
+	_mostRecentRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(0, 0), MKCoordinateSpanMake(0,0));
 	
 	_refreshTimer = nil;
 	
@@ -193,9 +191,10 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
     [self _setupOnMapToolbar];
 }
 
-// TODO: Fix crappy layout.
 - (void)_setupOnMapToolbar {
-    UIView *onMapToolbarWrapper = [[UIView alloc] initWithFrame:CGRectMake(11, CGRectGetHeight(self.view.bounds) - 55, 78, 31)];
+    CGFloat toolbarButtonWidth = 40;
+    CGFloat toolbarWidth = toolbarButtonWidth + 1 + 2 + 1 + toolbarButtonWidth;
+    UIView *onMapToolbarWrapper = [[UIView alloc] initWithFrame:CGRectMake(11, CGRectGetHeight(self.view.bounds) - 55, toolbarWidth, 31)];
     onMapToolbarWrapper.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     OBAScopeView *onMapToolbar = [[OBAScopeView alloc] initWithFrame:onMapToolbarWrapper.bounds];
 
@@ -221,7 +220,7 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
     UIButton *location = [UIButton buttonWithType:UIButtonTypeCustom];
     [location addTarget:self action:@selector(onCrossHairsButton:) forControlEvents:UIControlEventTouchUpInside];
     [location setImage:[UIImage imageNamed:@"lbs_arrow"] forState:UIControlStateNormal];
-    location.frame = CGRectMake(0, 0, 31, 31);
+    location.frame = CGRectMake(0, 0, toolbarButtonWidth, CGRectGetHeight(onMapToolbar.frame));
     [onMapToolbar addSubview:location];
 
     UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(location.frame) + 1, 4, 1, 23)];
@@ -234,11 +233,12 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
     separator.layer.rasterizationScale = [UIScreen mainScreen].scale;
     [onMapToolbar addSubview:separator];
 
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoDark];
-    [button addTarget:self action:@selector(showInfoPane) forControlEvents:UIControlEventTouchUpInside];
-    CGFloat x = CGRectGetMaxX(separator.frame) + 2;
-    button.frame = CGRectMake(x, 0, CGRectGetWidth(onMapToolbar.frame) - x, CGRectGetHeight(onMapToolbar.frame));
-    [onMapToolbar addSubview:button];
+    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [infoButton setImage:[UIImage imageNamed:@"info"] forState:UIControlStateNormal];
+    [infoButton addTarget:self action:@selector(showInfoPane) forControlEvents:UIControlEventTouchUpInside];
+    CGFloat infoButtonX = CGRectGetMaxX(separator.frame) + 2;
+    infoButton.frame = CGRectMake(infoButtonX, 0, toolbarButtonWidth, CGRectGetHeight(onMapToolbar.frame));
+    [onMapToolbar addSubview:infoButton];
 }
 
 - (void)onFilterClear {
