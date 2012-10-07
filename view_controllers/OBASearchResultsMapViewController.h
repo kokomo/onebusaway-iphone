@@ -37,11 +37,7 @@
 	MKMapView * _mapView;
     OBAMapRegionManager * _mapRegionManager;
     
-	UIBarButtonItem * _currentLocationButton;
-	UIBarButtonItem * _listButton;
     OBASearchResultsMapFilterToolbar * _filterToolbar;
-
-	OBAGenericAnnotation * _locationAnnotation;
 	
 	UIActivityIndicatorView * _activityIndicatorView;
 	OBANetworkErrorAlertViewDelegate * _networkErrorAlertViewDelegate;
