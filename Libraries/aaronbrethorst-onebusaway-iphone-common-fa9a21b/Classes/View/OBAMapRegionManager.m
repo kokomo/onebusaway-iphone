@@ -32,7 +32,6 @@ static const double kRegionChangeRequestsTimeToLive = 3.0;
     return self;
 }
 
-
 - (void) setRegion:(MKCoordinateRegion)region {
     [self setMapRegion:region requestType:OBARegionChangeRequestTypeProgramatic];
 }
@@ -45,23 +44,26 @@ static const double kRegionChangeRequestsTimeToLive = 3.0;
     self.currentlyChangingRegion = YES;
 }
 
+
+// TODO: @jefk - the problem is here!!!
+
 - (BOOL)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    
+
     self.currentlyChangingRegion = NO;
-    
+
     /**
-     * We need to figure out if this region change came from the user dragging the map                                                                                                                                         
-     * or from an actual programatic request we instigated.  The easiest way to tell is to                                                                                                                                                
+     * We need to figure out if this region change came from the user dragging the map
+     * or from an actual programatic request we instigated.  The easiest way to tell is to
      * keep a list of all our applied programatic region changes and compare them against
      * the actual map region change.  When the actual map region change doesn't match any
      * of our applied requests, we assume it must have been from a user zoom or pan.
      */
     MKCoordinateRegion region = self.mapView.region;
     OBARegionChangeRequestType type = OBARegionChangeRequestTypeUser;
-    
+
     //OBALogDebug(@"=== regionDidChangeAnimated: requests=%d",[self.appliedRegionChangeRequests count]);
     //OBALogDebug(@"region=%@", [OBASphericalGeometryLibrary regionAsString:region]);
-    
+
     OBARegionChangeRequest * request = [self getBestRegionChangeRequestForRegion:region];
     if( request ) {
         double score = [request compareRegion:region];
@@ -70,25 +72,24 @@ static const double kRegionChangeRequestsTimeToLive = 3.0;
         if( score < kMinRegionDeltaToDetectUserDrag )
             type = request.type;
     }
-    
+
     self.lastRegionChangeWasProgramatic = (type == OBARegionChangeRequestTypeProgramatic);
     //OBALogDebug(@"regionDidChangeAnimated: setting self.lastRegionChangeWasProgramatic to %d", self.lastRegionChangeWasProgramatic);
-    
+
     BOOL applyingPendingRequest = NO;
-    
+
     if( self.lastRegionChangeWasProgramatic && self.pendingRegionChangeRequest ) {
         //OBALogDebug(@"applying pending reqest");
         [self setMapRegionWithRequest:self.pendingRegionChangeRequest];
         applyingPendingRequest = YES;
     }
-    
+
     self.pendingRegionChangeRequest = [NSObject releaseOld:self.pendingRegionChangeRequest retainNew:nil];
 
     return applyingPendingRequest;
 }
 
 #pragma mark - Private Methods
-
 
 - (void) setMapRegion:(MKCoordinateRegion)region requestType:(OBARegionChangeRequestType)requestType {
 
