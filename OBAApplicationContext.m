@@ -15,7 +15,7 @@
  */
 
 #import <SystemConfiguration/SystemConfiguration.h>
-
+#import <Crashlytics/Crashlytics.h>
 #import "OBAApplicationContext.h"
 #import "OBANavigationTargetAware.h"
 #import "OBALogger.h"
@@ -110,6 +110,7 @@ static NSString * kOBADefaultApiServerName = @"api.onebusaway.org";
 - (void)_constructUI
 {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
 
     self.mapViewController = [[OBASearchResultsMapViewController alloc] init];
     self.mapViewController.appContext = self;
@@ -123,6 +124,8 @@ static NSString * kOBADefaultApiServerName = @"api.onebusaway.org";
 #pragma mark UIApplicationDelegate Methods
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [FlurryAnalytics startSession:@"HDQ7ZPV2NJR6CX75NSYJ"];
+    [Crashlytics startWithAPIKey:@"c84d1b759118d7506fea035b497a567d26a1c67b"];
     [self _migrateUserPreferences];
     [self _constructUI];
 
@@ -153,6 +156,7 @@ static NSString * kOBADefaultApiServerName = @"api.onebusaway.org";
 #pragma mark IASKSettingsDelegate
 
 - (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender {
+    [sender dismissViewControllerAnimated:YES completion:nil];
 	[self refreshSettings];
 }
 

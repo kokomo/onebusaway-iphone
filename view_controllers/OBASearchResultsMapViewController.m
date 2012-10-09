@@ -60,6 +60,8 @@ static const double kStopsInRegionRefreshDelayOnDrag = 0.5;
 static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
 
 @interface OBASearchResultsMapViewController ()
+@property(strong) UIView *activityIndicatorWrapper;
+@property(strong) UIActivityIndicatorView * activityIndicatorView;
 @property(strong) PaperFoldView *paperFoldView;
 @property(strong) UIButton *locationButton;
 @property(strong) UIBarButtonItem *listBarButtonItem;
@@ -141,23 +143,30 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
 
 	_networkErrorAlertViewDelegate = [[OBANetworkErrorAlertViewDelegate alloc] initWithContext:_appContext];
 
-	CGRect indicatorBounds = CGRectMake(12, 12, 32, 32);
-	_activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:indicatorBounds];
-	_activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-	_activityIndicatorView.hidesWhenStopped = YES;
-	[self.view addSubview:_activityIndicatorView];
+  CGRect indicatorBounds = CGRectMake(12, 12, 36, 36);
+  self.activityIndicatorWrapper = [[UIView alloc] initWithFrame:indicatorBounds];
+  self.activityIndicatorWrapper.backgroundColor = OBARGBACOLOR(0, 0, 0, 0.5);
+  self.activityIndicatorWrapper.layer.cornerRadius = 4.f;
+  self.activityIndicatorWrapper.layer.shouldRasterize = YES;
+  self.activityIndicatorWrapper.layer.rasterizationScale = [UIScreen mainScreen].scale;
+  self.activityIndicatorWrapper.hidden = YES;
+
+	self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectInset(self.activityIndicatorWrapper.bounds, 4, 4)];
+	self.activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+  [self.activityIndicatorWrapper addSubview:self.activityIndicatorView];
+	[self.view addSubview:self.activityIndicatorWrapper];
 
 	CLLocationCoordinate2D p = {0,0};
 	_mostRecentRegion = MKCoordinateRegionMake(p, MKCoordinateSpanMake(0,0));
 
 	_refreshTimer = nil;
 
-    _mapRegionManager = [[OBAMapRegionManager alloc] initWithMapView:_mapView];
-    _mapRegionManager.lastRegionChangeWasProgramatic = YES;
+  _mapRegionManager = [[OBAMapRegionManager alloc] initWithMapView:_mapView];
+  _mapRegionManager.lastRegionChangeWasProgramatic = YES;
 
 	_hideFutureNetworkErrors = NO;
 
-    self.filterToolbar = [[OBASearchResultsMapFilterToolbar alloc] initWithDelegate:self andAppContext:self.appContext];
+  self.filterToolbar = [[OBASearchResultsMapFilterToolbar alloc] initWithDelegate:self andAppContext:self.appContext];
 
 	_searchController = [[OBASearchController alloc] initWithAppContext:_appContext];
 	_searchController.delegate = self;
@@ -455,10 +464,12 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
 	id<OBAProgressIndicatorSource> progress = _searchController.progress;
 
 	if( progress.inProgress ) {
-		[_activityIndicatorView startAnimating];
+        self.activityIndicatorWrapper.hidden = NO;
+		[self.activityIndicatorView startAnimating];
 	}
 	else {
-		[_activityIndicatorView stopAnimating];
+        self.activityIndicatorWrapper.hidden = YES;
+		[self.activityIndicatorView stopAnimating];
 	}
 }
 
@@ -646,10 +657,8 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
 - (void)showInfoPane {
     OBAInfoViewController *infoViewController = [[OBAInfoViewController alloc] init];
     infoViewController.presenterViewController = self.navigationController;
-    UINavigationController *infoNavigation = [[UINavigationController alloc] initWithRootViewController:infoViewController];
-    infoNavigation.navigationBarHidden = YES;
-    infoNavigation.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-    [self presentViewController:infoNavigation animated:YES completion:nil];
+    infoViewController.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+    [self presentViewController:infoViewController animated:YES completion:nil];
 }
 
 - (void)_showBookmarks {
@@ -845,6 +854,7 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
 }
 
 - (CLLocation*) currentLocation {
+<<<<<<< HEAD
 	OBALocationManager * lm = _appContext.locationManager;
 	CLLocation * location = lm.currentLocation;
 
@@ -858,6 +868,17 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
 	}
 
 	return location;
+=======
+    if (_appContext.locationManager.currentLocation) {
+        return _appContext.locationManager.currentLocation;
+    }
+    else if (_searchController.searchLocation) {
+        return _searchController.searchLocation;
+    }
+    else {
+        return [[CLLocation alloc] initWithLatitude:_mapView.centerCoordinate.latitude longitude:_mapView.centerCoordinate.longitude];
+    }
+>>>>>>> master
 }
 
 - (void) showLocationServicesAlert {
