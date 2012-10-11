@@ -194,9 +194,9 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
 
     SLSearchTextField *searchTextField = [[SLSearchTextField alloc] initWithFrame:CGRectMake(0, 0, 191, 30)];
 
-//    self.navigationItem.titleView = searchTextField;
+    self.navigationItem.titleView = searchTextField;
 
-    self.navigationItem.titleView = self.searchBar;
+//    self.navigationItem.titleView = self.searchBar;
 
     [self _setupOnMapToolbar];
 }
