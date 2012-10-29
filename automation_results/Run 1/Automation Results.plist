@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>All Samples</key>
+	<array>
+		<dict>
+			<key>LogType</key>
+			<string>Debug</string>
+			<key>Message</key>
+			<string>UIANavigationBar: rect:{{0, 20}, {320, 44}}</string>
+			<key>Screenshot</key>
+			<string>86B7C50C-F0E5-442B-9A0C-DAB394BAA04D</string>
+			<key>Timestamp</key>
+			<date>2012-10-29T01:12:54Z</date>
+			<key>Type</key>
+			<integer>0</integer>
+			<key>children</key>
+			<array>
+				<dict>
+					<key>LogType</key>
+					<string>Debug</string>
+					<key>Message</key>
+					<string>UIAImage: rect:{{0, 20}, {320, 44}}</string>
+					<key>Screenshot</key>
+					<string>B6DDEB3D-6078-4BEF-B453-694F5754298D</string>
+					<key>Timestamp</key>
+					<date>2012-10-29T01:12:54Z</date>
+					<key>Type</key>
+					<integer>0</integer>
+					<key>children</key>
+					<array>
+						<dict>
+							<key>LogType</key>
+							<string>Debug</string>
+							<key>Message</key>
+							<string>UIAImage: rect:{{0, 0}, {320, 3}}</string>
+							<key>Timestamp</key>
+							<date>2012-10-29T01:12:54Z</date>
+							<key>Type</key>
+							<integer>0</integer>
+							<key>children</key>
+							<array/>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>LogType</key>
+					<string>Debug</string>
+					<key>Message</key>
+					<string>UIAButton: name:Locate Me rect:{{5, 27}, {35, 30}}</string>
+					<key>Screenshot</key>
+					<string>DAF3DE16-C927-457F-883A-0F48A4EEC92B</string>
+					<key>Timestamp</key>
+					<date>2012-10-29T01:12:54Z</date>
+					<key>Type</key>
+					<integer>0</integer>
+					<key>children</key>
+					<array/>
+				</dict>
+				<dict>
+					<key>LogType</key>
+					<string>Debug</string>
+					<key>Message</key>
+					<string>UIAImage: rect:{{48, 20}, {220, 44}}</string>
+					<key>Screenshot</key>
+					<string>911188C6-B7D7-4F6F-98E8-AA5182E3B820</string>
+					<key>Timestamp</key>
+					<date>2012-10-29T01:12:54Z</date>
+					<key>Type</key>
+					<integer>0</integer>
+					<key>children</key>
+					<array/>
+				</dict>
+				<dict>
+					<key>LogType</key>
+					<string>Debug</string>
+					<key>Message</key>
+					<string>UIASegmentedControl: rect:{{48, 20}, {220, 44}}</string>
+					<key>Screenshot</key>
+					<string>00571BDA-C7BA-46B4-93F8-BEC5C8CBEF9A</string>
+					<key>Timestamp</key>
+					<date>2012-10-29T01:12:54Z</date>
+					<key>Type</key>
+					<integer>0</integer>
+					<key>children</key>
+					<array>
+						<dict>
+							<key>LogType</key>
+							<string>Debug</string>
+							<key>Message</key>
+							<string>UIAImage: rect:{{48, 20}, {220, 44}}</string>
+							<key>Screenshot</key>
+							<string>F8A5EAF7-5E7E-44C5-A69E-6E1A9F21446D</string>
+							<key>Timestamp</key>
+							<date>2012-10-29T01:12:54Z</date>
+							<key>Type</key>
+							<integer>0</integer>
+							<key>children</key>
+							<array>
+								<dict>
+									<key>LogType</key>
+									<string>Debug</string>
+									<key>Message</key>
+									<string>UIAImage: rect:{{48, 64}, {220, 3}}</string>
+									<key>Timestamp</key>
+									<date>2012-10-29T01:12:54Z</date>
+									<key>Type</key>
+									<integer>0</integer>
+									<key>children</key>
+									<array/>
+								</dict>
+							</array>
+						</dict>
+						<dict>
+							<key>LogType</key>
+							<string>Debug</string>
+							<key>Message</key>
+							<string>UIAButton: name:Title value:1 rect:{{53, 27}, {105, 30}}</string>
+							<key>Screenshot</key>
+							<string>49731BE1-0C11-47F2-8A45-9AF697803885</string>
+							<key>Timestamp</key>
+							<date>2012-10-29T01:12:54Z</date>
+							<key>Type</key>
+							<integer>0</integer>
+							<key>children</key>
+							<array/>
+						</dict>
+						<dict>
+							<key>LogType</key>
+							<string>Debug</string>
+							<key>Message</key>
+							<string>UIAButton: name:Title rect:{{159, 27}, {104, 30}}</string>
+							<key>Screenshot</key>
+							<string>FEF9A092-600E-40FE-BA0E-E6BCE785A607</string>
+							<key>Timestamp</key>
+							<date>2012-10-29T01:12:54Z</date>
+							<key>Type</key>
+							<integer>0</integer>
+							<key>children</key>
+							<array/>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>LogType</key>
+					<string>Debug</string>
+					<key>Message</key>
+					<string>UIASearchBar: value:Search rect:{{53, 26}, {210, 31}}</string>
+					<key>Screenshot</key>
+					<string>34B4EEA0-C2D5-4F08-8761-BCFDF35DF6EC</string>
+					<key>Timestamp</key>
+					<date>2012-10-29T01:12:54Z</date>
+					<key>Type</key>
+					<integer>0</integer>
+					<key>children</key>
+					<array/>
+				</dict>
+				<dict>
+					<key>LogType</key>
+					<string>Debug</string>
+					<key>Message</key>
+					<string>UIAButton: name:List Stops rect:{{276, 27}, {39, 30}}</string>
+					<key>Screenshot</key>
+					<string>A2BE7A66-5832-4300-A9DC-2F3A4E6BB140</string>
+					<key>Timestamp</key>
+					<date>2012-10-29T01:12:54Z</date>
+					<key>Type</key>
+					<integer>0</integer>
+					<key>children</key>
+					<array/>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>version</key>
+	<integer>2</integer>
+</dict>
+</plist>
