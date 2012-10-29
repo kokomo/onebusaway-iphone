@@ -166,9 +166,17 @@ static const double kStopsInRegionRefreshDelayOnLocate = 0.1;
 	_searchController.delegate = self;
 	_searchController.progress.delegate = self;
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"lbs_arrow"] style:UIBarButtonItemStyleBordered target:self action:@selector(onCrossHairsButton:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"lbs_arrow"]
+                                                                             style:UIBarButtonItemStyleBordered
+                                                                            target:self
+                                                                            action:@selector(onCrossHairsButton:)];
+
+    self.navigationItem.leftBarButtonItem.accessibilityLabel = NSLocalizedString(@"Locate Me", @"");
+    self.navigationItem.leftBarButtonItem.accessibilityHint = NSLocalizedString(@"Finds your current location and reloads the map with nearby stops.", @"");
 
     self.listBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"lines"] style:UIBarButtonItemStyleBordered target:self action:@selector(onListButton:)];
+    
+    self.listBarButtonItem.accessibilityLabel = NSLocalizedString(@"List Stops", @"");
     self.navigationItem.rightBarButtonItem = self.listBarButtonItem;
     
     self.searchResultsListViewController = [[OBASearchResultsListViewController alloc] initWithContext:_appContext searchControllerResult:nil];
