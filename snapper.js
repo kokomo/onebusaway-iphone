@@ -16,6 +16,7 @@ var dumpJSON = function(elt) {
     name: elt.name(),
     value: elt.value(),
     rect: elt.rect(),
+    hint: elt.hint(),
     stringValue: elt.toString()
   };
 };
@@ -29,7 +30,7 @@ var dumpJSONTree = function(elt) {
   if (elt.elements().isNil()) {
     output = null;
   } else {
-    elt.elements().collect(function(index, e) {
+    output = elt.elements().collect(function(index, e) {
       if (elt.isNil()) {
         return null;
       } else {
