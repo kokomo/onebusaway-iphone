@@ -44,10 +44,10 @@ var arrayMethods = {
 extend( UIAElementArray.prototype, arrayMethods );
 extend( Array.prototype, arrayMethods );
 
-var notNilMethod = {
-  notNil: function() {
-    this.toString() !== "[object UIAElementNil]";
+var isNilMethod = {
+  isNil: function() {
+    this.toString() === "[object UIAElementNil]";
   }
 };
-extend( UIAElement.prototype, notNilMethod );
-extend( UIAElementArray.prototype, notNilMethod );
+extend( UIAElement.prototype, isNilMethod );
+extend( UIAElementArray.prototype, isNilMethod );

@@ -7,7 +7,7 @@ var app = target.frontMostApp();
 var window = app.mainWindow();
 
 var dumpJSON = function(elt) {
-  if (elt.toString() === "[object UIAElementNil]") {
+  if (elt.isNil()) {
     return null;
   }
 
@@ -26,11 +26,11 @@ var dumpJSONTree = function(elt) {
 
   var output = null;
 
-  if (elt.elements().toString() === '[object UIAElementNil]') {
+  if (elt.elements().isNil()) {
     output = null;
   } else {
     elt.elements().collect(function(index, e) {
-      if (elt.toString() === "[object UIAElementNil]") {
+      if (elt.isNil()) {
         return null;
       } else {
         return dumpJSON(e);
@@ -43,7 +43,5 @@ var dumpJSONTree = function(elt) {
   return eltData;
 };
 
-// window.logElement();
-
 out = JSON.stringify(dumpJSONTree(window));
-UIALogger.logMessage(out);
+log(out);
