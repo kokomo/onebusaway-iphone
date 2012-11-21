@@ -29,7 +29,7 @@ mkdir -p $BUILD_DIR
 
 # Build our application and place the final bundle in our temporary directory
 # xcodebuild -sdk iphonesimulator clean build CONFIGURATION_BUILD_DIR=$BUILD_DIR
-xcodebuild -sdk iphonesimulator CONFIGURATION_BUILD_DIR=$BUILD_DIR
+# xcodebuild -sdk iphonesimulator CONFIGURATION_BUILD_DIR=$BUILD_DIR
 
 # Clean out any existing automation results (we don't need to keep them for this demo)
 rm -rf automation_results
