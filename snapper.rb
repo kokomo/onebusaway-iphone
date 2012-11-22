@@ -24,23 +24,45 @@
 
 require 'rexml/document'
 require 'tmpdir'
+require 'json'
+require 'awesome_print'
 
 class Snapper
   include REXML
   attr_accessor :working_dir
+  attr_accessor :build_dir
 
   def initialize
     self.working_dir = Dir.mktmpdir
+    self.build_dir = '/tmp/snapper_build'
   end
 
   def build_app(log_results = true, clean = false)
     clean = clean ? ' clean ' : ''
-    output = `xcodebuild -sdk iphonesimulator #{clean} CONFIGURATION_BUILD_DIR=#{self.working_dir}`
+    output = `xcodebuild -sdk iphonesimulator #{clean} CONFIGURATION_BUILD_DIR=#{build_dir}`
     puts output if log_results
   end
 
   def app_path
-    Dir[File.join(self.working_dir, "*.app")].first
+    @app_path ||= Dir[File.join(self.build_dir, "*.app")].first
+  end
+
+  def bundle_identifier
+    # ???
+  end
+
+  def screenshot_path
+    p = File.join(working_dir, 'Run 1', "#{bundle_identifier}.png")
+    "\"#{p}\""
+  end
+
+  def results_plist_path
+    "#{working_dir}/Run 1/Automation Results.plist"
+  end
+
+  def ui_data
+    plist = Document.new(File.open(results_plist_path))
+    json_ui = JSON.parse(plist.root.get_text('//plist/dict/array/dict[1]/string[2]').to_s)
   end
 
   def run_instruments(log_results = true)
@@ -65,4 +87,9 @@ end
 snapper = Snapper.new
 snapper.build_app
 snapper.run_instruments
-# snapper.cleanup
+ap snapper.ui_data
+
+# `open #{snapper.screenshot_path}`
+# `open #{snapper.results_plist_path}`
+
+snapper.cleanup
