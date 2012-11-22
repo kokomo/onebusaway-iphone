@@ -43,5 +43,6 @@ var dumpJSONTree = function(elt) {
   return eltData;
 };
 
+target.captureScreenWithName(app.bundleID());
 out = JSON.stringify(dumpJSONTree(window));
 log(out);
