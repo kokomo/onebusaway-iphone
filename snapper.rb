@@ -92,6 +92,6 @@ image_path = snapper.screenshot_path
 
 ia = ImageAnnotator.new(image_path, ui_data)
 ia.annotate!
-ia.write('output.png')
+ia.write('/Users/aaron/Desktop/output.png')
 
-# snapper.cleanup
+snapper.cleanup
