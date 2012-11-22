@@ -51,3 +51,14 @@ var isNilMethod = {
 };
 extend( UIAElement.prototype, isNilMethod );
 extend( UIAElementArray.prototype, isNilMethod );
+
+// requires a number or null (e.g. 1, 0 or null -> yes, no, or 'unknown')
+var triStateBooleanValue = function(val) {
+  if (val > 0) {
+    return true;
+  } else if (val == 0) {
+    return false;
+  } else {
+    return null;
+  }
+};
