@@ -39,11 +39,15 @@ class Snapper
     puts output if log_results
   end
 
+  def app_path
+    Dir[File.join(self.working_dir, "*.app")].first
+  end
+
   def run_instruments(log_results = true)
     ui_args = [
       "-D #{self.working_dir}/trace",
       "-t UIAutomationTemplate.tracetemplate",
-      "#{self.working_dir}/OneBusAway.app",
+      app_path,
       "-e UIARESULTSPATH #{self.working_dir}",
       "-e UIASCRIPT snapper.js"
     ]
@@ -61,4 +65,4 @@ end
 snapper = Snapper.new
 snapper.build_app
 snapper.run_instruments
-snapper.cleanup
+# snapper.cleanup
