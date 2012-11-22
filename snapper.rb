@@ -85,7 +85,7 @@ class Snapper
 end
 
 snapper = Snapper.new
-snapper.build_app
+# snapper.build_app
 snapper.run_instruments
 ap snapper.ui_data
 

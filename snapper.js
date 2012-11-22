@@ -25,13 +25,13 @@ var dumpJSON = function(elt) {
   return eltData;
 };
 
-var dumpJSONTree = function(elt) {
-  var eltData = dumpJSON(elt);
+var dumpChildren = function(elt) {
+  var children;
 
   if (elt.elements().isNil()) {
-    eltData.children = null;
+    children = null;
   } else {
-    eltData.children = elt.elements().collect(function(index, e) {
+    children = elt.elements().collect(function(index, e) {
       if (elt.isNil()) {
         return null;
       } else {
@@ -39,6 +39,17 @@ var dumpJSONTree = function(elt) {
       }
     });
   }
+  return children;
+};
+
+var dumpJSONTree = function(elt) {
+  var eltData = dumpJSON(elt);
+
+  if (eltData === null) {
+    return null;
+  }
+
+  eltData.children = dumpChildren(elt);
 
   return eltData;
 };
