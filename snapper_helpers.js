@@ -49,6 +49,7 @@ var isNilMethod = {
     this.toString() === "[object UIAElementNil]";
   }
 };
+extend( Object.prototype, isNilMethod );
 extend( UIAElement.prototype, isNilMethod );
 extend( UIAElementArray.prototype, isNilMethod );
 

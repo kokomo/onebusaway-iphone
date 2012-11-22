@@ -25,19 +25,25 @@ var dumpJSON = function(elt) {
   return eltData;
 };
 
+var collectCallback = function(index, e) {
+  if (e.isNil()) {
+    return null;
+  } else {
+    return dumpJSON(e);
+  }
+};
+
 var dumpChildren = function(elt) {
   var children;
 
-  if (elt.elements().isNil()) {
+  if (elt.isNil() || elt.elements().isNil()) {
     children = null;
   } else {
-    children = elt.elements().collect(function(index, e) {
-      if (elt.isNil()) {
-        return null;
-      } else {
-        return dumpJSON(e);
-      }
-    });
+    try {
+      children = elt.elements().collect(collectCallback);
+    } catch (ex) {
+      children = null;
+    }
   }
   return children;
 };
@@ -49,9 +55,10 @@ var dumpJSONTree = function(elt) {
     return null;
   }
 
-  eltData.children = dumpChildren(elt);
+  var children = dumpChildren(elt);
+  children.unshift(eltData);
 
-  return eltData;
+  return children;
 };
 
 log(JSON.stringify(dumpJSONTree(window)));
