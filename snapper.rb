@@ -26,6 +26,7 @@ require 'rexml/document'
 require 'tmpdir'
 require 'json'
 require 'awesome_print'
+load 'draw.rb'
 
 class Snapper
   include REXML
@@ -48,12 +49,11 @@ class Snapper
   end
 
   def bundle_identifier
-    # ???
+    'org.onebusaway.iphone'
   end
 
   def screenshot_path
     p = File.join(working_dir, 'Run 1', "#{bundle_identifier}.png")
-    "\"#{p}\""
   end
 
   def results_plist_path
@@ -87,9 +87,11 @@ end
 snapper = Snapper.new
 # snapper.build_app
 snapper.run_instruments
-ap snapper.ui_data
+ui_data = snapper.ui_data
+image_path = snapper.screenshot_path
 
-# `open #{snapper.screenshot_path}`
-# `open #{snapper.results_plist_path}`
+ia = ImageAnnotator.new(image_path, ui_data)
+ia.annotate!
+ia.write('output.png')
 
-snapper.cleanup
+# snapper.cleanup

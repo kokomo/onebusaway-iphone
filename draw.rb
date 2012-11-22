@@ -20,6 +20,12 @@ class ImageAnnotator
       context.fill_opacity(0.8)
       coords = cgrect_to_coords(v['rect'])
       context.rectangle(*coords)
+
+      unless v['label'].nil? && v['name'].nil?
+        context.fill('black')
+        context.fill_opacity(1.0)
+        context.text(coords[0], coords[1], v['label'] || v['name'])
+      end
     end
     # {
     #   "label" => nil,
@@ -62,7 +68,7 @@ class ImageAnnotator
   end
 
   def color
-    %w{aqua black blue fuchsia gray green lime maroon navy olive purple red silver teal yellow}.sample
+    %w{aqua blue fuchsia gray green lime maroon navy olive purple red silver teal yellow}.sample
   end
 end
 
