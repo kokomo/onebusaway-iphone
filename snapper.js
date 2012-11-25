@@ -25,6 +25,23 @@ var dumpJSON = function(elt) {
   return eltData;
 };
 
+var collectChildren = function(elt) {
+  return elt.elements().collect(function(index, e) {
+    if (e.isNil()) {
+      return null;
+    } else {
+      var t = Object.prototype.toString.call(e);
+      log(t + " (" + e.elements().length + ")");
+
+      if (e.elements().length > 0) {
+        return dumpJSONTree(e);
+      } else {
+        return dumpJSON(e);
+      }
+    }
+  });
+};
+
 var dumpChildren = function(elt) {
   var children;
 
@@ -32,15 +49,7 @@ var dumpChildren = function(elt) {
     children = null;
   } else {
     try {
-      children = elt.elements().collect(function(index, e) {
-        if (e.isNil()) {
-          return null;
-        } else {
-          var t = Object.prototype.toString.call(e);
-          log(t + " (" + e.elements().length + ")");
-          return dumpJSON(e);
-        }
-      });
+      children = collectChildren(elt);
     } catch (ex) {
       children = null;
     }
@@ -61,5 +70,23 @@ var dumpJSONTree = function(elt) {
   return children;
 };
 
-log(JSON.stringify(dumpJSONTree(window)));
-target.captureScreenWithName(app.bundleID());
+methods = [
+    "activityIndicators", "activityView", "buttons", "collectionViews", "images",
+    "links", "navigationBars", "pageIndicators", "pickers", "popover",
+    "progressIndicators", "scrollViews", "searchBars", "secureTextFields",
+    "segmentedControls", "sliders", "staticTexts", "switches", "tabBars",
+    "tableViews", "textFields", "textViews", "toolbars", "webViews"
+  ]
+
+methods.each(function(i, name) {
+  if (typeof window[name] !== 'undefined') {
+    log(name + " (" + window[name]().length + ")");
+  } else {
+    log("Set your minimum iOS deployment target to 6.0 to use " + name);
+  }
+});
+
+log("AI: " + window['activityIndicators']().length);
+
+// log(JSON.stringify(dumpJSONTree(window)));
+// target.captureScreenWithName(app.bundleID());
