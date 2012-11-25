@@ -25,68 +25,84 @@ var dumpJSON = function(elt) {
   return eltData;
 };
 
-var collectChildren = function(elt) {
-  return elt.elements().collect(function(index, e) {
-    if (e.isNil()) {
-      return null;
-    } else {
-      var t = Object.prototype.toString.call(e);
-      log(t + " (" + e.elements().length + ")");
-
-      if (e.elements().length > 0) {
-        return dumpJSONTree(e);
-      } else {
-        return dumpJSON(e);
-      }
-    }
-  });
-};
-
-var dumpChildren = function(elt) {
-  var children;
-
-  if (elt.isNil() || elt.elements().isNil()) {
-    children = null;
-  } else {
-    try {
-      children = collectChildren(elt);
-    } catch (ex) {
-      children = null;
-    }
-  }
-  return children;
-};
-
-var dumpJSONTree = function(elt) {
-  var eltData = dumpJSON(elt);
-
-  if (eltData === null) {
-    return null;
-  }
-
-  var children = dumpChildren(elt);
-  children.unshift(eltData);
-
-  return children;
-};
+var dumpedElements = [dumpJSON(window)];
 
 methods = [
-    "activityIndicators", "activityView", "buttons", "collectionViews", "images",
-    "links", "navigationBars", "pageIndicators", "pickers", "popover",
-    "progressIndicators", "scrollViews", "searchBars", "secureTextFields",
-    "segmentedControls", "sliders", "staticTexts", "switches", "tabBars",
-    "tableViews", "textFields", "textViews", "toolbars", "webViews"
+    "", "", "", "",
+    "", "", "", "",
+    "", "", "", "", "",
+    "", "", "", "", ""
   ]
 
-methods.each(function(i, name) {
-  if (typeof window[name] !== 'undefined') {
-    log(name + " (" + window[name]().length + ")");
-  } else {
-    log("Set your minimum iOS deployment target to 6.0 to use " + name);
+var dumpCollection = function(eltArray, dumpChildren) {
+
+  if (typeof dumpChildren === 'undefined') {
+    dumpChildren = false;
   }
-});
 
-log("AI: " + window['activityIndicators']().length);
+  if (eltArray.length > 0) {
+    return eltArray.collect(function(i, e) {
+      if (typeof e !== 'undefined' && !e.isNil()) {
+        var ret = dumpJSON(e);
 
-// log(JSON.stringify(dumpJSONTree(window)));
-// target.captureScreenWithName(app.bundleID());
+        if (dumpChildren) {
+          var kidElts = dumpCollection(e.elements());
+          return [ret, kidElts];
+        } else {
+          return ret;
+        }
+      }
+    });
+  } else {
+    return [];
+  }
+};
+
+// TODO: popover(), collectionViews(), tableViews(), scrollViews()
+
+// dumpedElements = dumpedElements.concat(dumpCollection(window.navigationBars(), true));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.tabBars(), true));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.toolbars(), true));
+
+// dumpedElements = dumpedElements.concat(dumpCollection(window.activityIndicators()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.buttons()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.images()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.links()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.pageIndicators()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.pickers()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.progressIndicators()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.searchBars()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.secureTextFields()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.segmentedControls()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.sliders()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.staticTexts()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.switches()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.textFields()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.textViews()));
+// dumpedElements = dumpedElements.concat(dumpCollection(window.webViews()));
+
+// methods.each(function(i, name) {
+//   if (typeof window[name] !== 'undefined') {
+//     var typedElts = window[name]();
+//
+//     log(name + " (" + typedElts.length + ")");
+//
+//     if (typedElts.length > 0) {
+//       log("Adding elts!");
+//       typedElts.each(function(i, e) {
+//         dumpedElements.push(dumpJSON(e))
+//       });
+//       log(JSON.stringify(dumpedElements));
+//     }
+//   } else {
+//     log("Set your minimum iOS deployment target to 6.0 to use " + name);
+//   }
+// });
+
+
+// ppJSON(dumpedElements);
+
+window.logElementTree();
+
+// log(JSON.stringify(dumpedElements));
+target.captureScreenWithName(app.bundleID());

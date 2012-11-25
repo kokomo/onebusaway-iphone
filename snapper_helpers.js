@@ -44,6 +44,14 @@ var arrayMethods = {
 extend( UIAElementArray.prototype, arrayMethods );
 extend( Array.prototype, arrayMethods );
 
+extend( Array.prototype, {
+  flatten: function() {
+    this.reduce(function(a, b) {
+      return a.concat(b);
+    });
+  }
+})
+
 var isNilMethod = {
   isNil: function() {
     this.toString() === "[object UIAElementNil]";
@@ -63,3 +71,8 @@ var triStateBooleanValue = function(val) {
     return null;
   }
 };
+
+var ppJSON = function(data) {
+  out = JSON.stringify(data, null, "  ");
+  log(out);
+}
