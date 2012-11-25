@@ -61,6 +61,7 @@ class Snapper
   end
 
   def ui_data
+    PlistParser.new
     plist = Document.new(File.open(results_plist_path))
     json_ui = JSON.parse(plist.root.get_text('//plist/dict/array/dict[1]/string[2]').to_s)
   end
