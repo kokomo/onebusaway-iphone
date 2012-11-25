@@ -25,14 +25,6 @@ var dumpJSON = function(elt) {
   return eltData;
 };
 
-var collectCallback = function(index, e) {
-  if (e.isNil()) {
-    return null;
-  } else {
-    return dumpJSON(e);
-  }
-};
-
 var dumpChildren = function(elt) {
   var children;
 
@@ -40,7 +32,15 @@ var dumpChildren = function(elt) {
     children = null;
   } else {
     try {
-      children = elt.elements().collect(collectCallback);
+      children = elt.elements().collect(function(index, e) {
+        var kid = null;
+        try {
+          var t = Object.prototype.toString.call(e);
+          log(t + " (" + e.elements().length + ")");
+          return dumpJSON(e);
+        } catch (ex) { }
+        return kid;
+      });
     } catch (ex) {
       children = null;
     }
