@@ -33,13 +33,13 @@ var dumpChildren = function(elt) {
   } else {
     try {
       children = elt.elements().collect(function(index, e) {
-        var kid = null;
-        try {
+        if (e.isNil()) {
+          return null;
+        } else {
           var t = Object.prototype.toString.call(e);
           log(t + " (" + e.elements().length + ")");
           return dumpJSON(e);
-        } catch (ex) { }
-        return kid;
+        }
       });
     } catch (ex) {
       children = null;
