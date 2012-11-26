@@ -22,14 +22,11 @@
 # Adapted from Jonathan Penn's AutomationExample project:
 # https://github.com/jonathanpenn/AutomationExample
 
-require 'rexml/document'
 require 'tmpdir'
-require 'json'
 require 'awesome_print'
-load 'draw.rb'
+require_relative './draw.rb'
 
 class Snapper
-  include REXML
   attr_accessor :working_dir
   attr_accessor :build_dir
 
@@ -61,7 +58,7 @@ class Snapper
   end
 
   def ui_data
-    PlistParser.new
+    parser = PlistParser.new(results_plist_path)
     plist = Document.new(File.open(results_plist_path))
     json_ui = JSON.parse(plist.root.get_text('//plist/dict/array/dict[1]/string[2]').to_s)
   end
