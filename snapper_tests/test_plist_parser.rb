@@ -21,6 +21,12 @@ class TestPlistParser < Test::Unit::TestCase
     assert_equal(rect, @parser.parse_rect("{{1, 2}, {3, 4}}"))
   end
 
+  def test_parse_message_parts
+    assert_equal(["UIAToolbar", "rect:{{0, 431}, {320, 44}}"], @parser.parse_message_parts("UIAToolbar: rect:{{0, 431}, {320, 44}}"))
+    assert_equal(["UIAButton", "name:Recent", "rect:{{82, 432}, {76, 48}}"], @parser.parse_message_parts("UIAButton: name:Recent rect:{{82, 432}, {76, 48}}"))
+    # and "UIAButton: name:Map value:1 rect:{{2, 432}, {76, 48}}"
+  end
+
   # def test_parse_message
   #   message = "UIAWindow: rect:{{0, 0}, {320, 480}}"
   #   parsed = @parser.parse_message(message)
